@@ -1,5 +1,5 @@
 // export default {
-//   name: "products",
+//   name: "miniCart",
 //   state: {},
 //   reducers: {
 //     delete(state, { payload: id }) {
@@ -9,15 +9,15 @@
 // };
 
 export default {
-  name: "products",
+  name: "miniCart",
   state: {},
-  reducers: function(state = { name: "AAAA" }, action) {
+  reducers: function(state = {}, action) {
     switch (action) {
-      case "RECEIVE_MYBAGS":
+      case "START":
         return {
           ...state,
           ...action.payload,
-          name: "BBBB"
+          isUpdate: false
         };
       default:
         return state;

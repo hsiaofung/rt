@@ -8,30 +8,36 @@ import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
 export const app = {
   _models: [],
-  reducers: {},
-  middleware: [],
-  getReducers: function() {
-    return combineReducers({});
+  reducers: {
+    router: {}
   },
-  getProvider: function() {
+  middleware: [],
+  getReducers: function(reducers) {
+    return combineReducers(reducers);
+  },
+  getProvider: function(reducers) {
     const store = createStore(
-      this.getReducers(),
+      this.getReducers(reducers),
       composeWithDevTools(applyMiddleware(thunk))
     );
+    console.log("store", store);
     return (
       <Provider store={store}>
         <App />
       </Provider>
     );
   },
-  render: function() {
-    ReactDOM.render(this.getProvider(), document.getElementById("root"));
+  render: function(reducers) {
+    ReactDOM.render(
+      this.getProvider(reducers),
+      document.getElementById("root")
+    );
   },
   start: function() {
     for (const m of this._models) {
-      this.reducers[m.name] = this.getReducer(m.reducers, m.state);
+      this.reducers[m.default.name] = m.default.reducers;
     }
-    this.render();
+    this.render(this.reducers);
   },
   model: function(appModel) {
     this._models.push(appModel);
