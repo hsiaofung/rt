@@ -13,13 +13,13 @@ So we can only use single model file to implement Redux/Redux-thunk<br>
 Add this line in your index.js to add a new page
 
 ```
-create a new page : app.page({ path: "/home", component: require("./pages/Home") });
+app.page({ path: "/home", component: require("./pages/Home") });
 ```
 
 Add this line in your index.js to add a new model
 
 ```
-create a new model : app.model(require("./models/products"));
+app.model(require("./models/products"));
 ```
 
 this is all
