@@ -7,22 +7,25 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
 export const app = {
-  _models: [],
-  reducers: {
-    router: {}
-  },
+  models: [],
+  store: {},
+  reducers: {},
   middleware: [],
+
+  getStore: function() {
+    return this.store;
+  },
   getReducers: function(reducers) {
     return combineReducers(reducers);
   },
   getProvider: function(reducers) {
-    const store = createStore(
+    this.store = createStore(
       this.getReducers(reducers),
       composeWithDevTools(applyMiddleware(thunk))
     );
-    console.log("store", store);
+
     return (
-      <Provider store={store}>
+      <Provider store={this.store}>
         <App />
       </Provider>
     );
@@ -34,12 +37,16 @@ export const app = {
     );
   },
   start: function() {
-    for (const m of this._models) {
+    for (const m of this.models) {
       this.reducers[m.default.name] = m.default.reducers;
     }
     this.render(this.reducers);
   },
   model: function(appModel) {
-    this._models.push(appModel);
+    this.models.push(appModel);
   }
 };
+
+export function dispatch(action) {
+  return app.getStore().dispatch(action);
+}

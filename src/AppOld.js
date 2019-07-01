@@ -1,43 +1,29 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { connect } from "react-redux";
+import products from "./models/products";
 
 class App extends React.Component {
-  componentDidMount() {
-    // this.props.send();
-  }
   render() {
     return (
       <div className="App">
-        {console.log(this.props.name)}
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <button onClick={this.props.add}>{this.props.name}</button>
       </div>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
-    name: state.products.name
+    name: state.products.name,
+    value: state.miniCart.value
   };
 };
-const mapDispatchToProps = dispatch => {
-  console.log("dispatch", dispatch);
+
+const mapDispatchToProps = () => {
   return {
-    // send: () => dispatch(send())
+    add: () => products.actions.add(),
+    fetchData: () => products.actions.fetchData()
   };
 };
 

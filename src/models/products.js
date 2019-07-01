@@ -1,19 +1,26 @@
-// export default {
-//   name: "products",
-//   state: {},
-//   reducers: {
-//     delete(state, { payload: id }) {
-//       return state.filter(item => item.id !== id);
-//     }
-//   }
-// };
+import { dispatch } from "../app.js";
 
 export default {
   name: "products",
-  state: {},
-  reducers: function(state = { name: "AAAA" }, action) {
-    switch (action) {
-      case "RECEIVE_MYBAGS":
+  actions: {
+    create: () => dispatch({ type: "CREATE", payload: "100" }),
+    add: () => dispatch({ type: "ADD" }),
+    fetchData: () => {
+      fetch(
+        "https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes",
+        {
+          credentials: "include",
+          headers: { "content-type": "application/json" },
+          mode: "cors"
+        }
+      )
+        .then(res => res.json())
+        .then(json => dispatch({ type: "WRITE", payload: json }));
+    }
+  },
+  reducers: function(state = { name: "KKKK" }, action) {
+    switch (action.type) {
+      case "ADD":
         return {
           ...state,
           ...action.payload,

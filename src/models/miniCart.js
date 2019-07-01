@@ -11,13 +11,14 @@
 export default {
   name: "miniCart",
   state: {},
-  reducers: function(state = {}, action) {
+  reducers: function(state = { value: 100 }, action) {
     switch (action) {
       case "START":
         return {
           ...state,
           ...action.payload,
-          isUpdate: false
+          isUpdate: false,
+          value: 50
         };
       default:
         return state;
