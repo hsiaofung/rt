@@ -1,5 +1,5 @@
 # description
-========================
+
 Redux, React-Redux, Redux-thunk Encapsulation.<br>
 So we can only use single model file to implement Redux/Redux-thunk<br>
 
