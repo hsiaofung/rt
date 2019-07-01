@@ -8,10 +8,18 @@ So we can only use single model file to implement Redux/Redux-thunk<br>
 *Single model file implement redux/redux-thunk.<br>
 *Clear API to add new model.<br>
 
-## How to
+## How to use
+
+Add this line in your index.js to add a new page
 
 ```
 create a new page : app.page({ path: "/home", component: require("./pages/Home") });
 ```
 
-### create a new model : app.model(require("./models/products"));
+Add this line in your index.js to add a new model
+
+```
+create a new model : app.model(require("./models/products"));
+```
+
+this is all
