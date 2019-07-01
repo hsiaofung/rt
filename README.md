@@ -1,6 +1,6 @@
 # Description
 
-Redux, React-Redux, Redux-thunk Encapsulation.<br>
+Redux, React-Redux, Redux-thunk, Router Encapsulation.<br>
 So we can only use single model file to implement Redux/Redux-thunk<br>
 
 ## Feature
