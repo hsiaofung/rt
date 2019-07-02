@@ -17,7 +17,7 @@ So we can only use single model file to implement Redux/Redux-thunk<br>
 npx create-react-app my-app
 ```
 
-- Delete contents in index.js
+- Delete contents in index.js, and add the contents as below.
 
 - import app.js
 
