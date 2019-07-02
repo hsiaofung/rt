@@ -20,6 +20,9 @@ export const app = {
     return combineReducers(reducers);
   },
   getRouter: function() {
+    function getExact(path) {
+      return path === "/" ? true : false;
+    }
     return (
       <Router>
         <Switch>
@@ -28,7 +31,7 @@ export const app = {
               <Route
                 key={page.path}
                 path={page.path}
-                exact={(page.props && page.props.exact) || false}
+                exact={getExact(page.path)}
                 component={page.component.default}
               />
             );
