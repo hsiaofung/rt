@@ -11,33 +11,33 @@ So we can only use single model file to implement Redux/Redux-thunk<br>
 
 ## How to use
 
-- [Create a creat-react-app project]
+- Create a creat-react-app project
 
 ```
 npx create-react-app my-app
 ```
 
-Delete contents in index.js
+- Delete contents in index.js
 
-import app.js
+- import app.js
 
 ```
 import { app } from "./app";
 ```
 
-Then, you can start to add your new page.
+- Then, you can start to add your new page.
 
 ```
 app.page({ path: "/home", component: require("./pages/Home") });
 ```
 
-Or, add a new model
+- Or, add a new model
 
 ```
 app.model(require("./models/products"));
 ```
 
-After that, strat your app
+- After that, strat your app
 
 ```
 app.start("root");
