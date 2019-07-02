@@ -1,4 +1,3 @@
-import "./index.css";
 import { app } from "./app";
 
 //註冊頁面
