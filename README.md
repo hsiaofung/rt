@@ -6,8 +6,8 @@ So we can only use single model file to implement Redux/Redux-thunk<br>
 ## Feature
 
 *Support create-react-app<br>
-*Single model file implement redux/redux-thunk.<br>
-*Clear API to add new model.<br>
+*Write action, action type, reducer in a single.<br>
+*Clear API to implement Web frontend.<br>
 
 ## How to use
 
