@@ -28,6 +28,7 @@ export const app = {
               <Route
                 key={page.path}
                 path={page.path}
+                exact={(page.props && page.props.exact) || false}
                 component={page.component.default}
               />
             );
