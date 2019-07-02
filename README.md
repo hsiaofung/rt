@@ -6,18 +6,18 @@ So we can only use single model file to implement Redux/Redux-thunk<br>
 ## Feature
 
 *Support create-react-app<br>
-*Write action, action type, reducer in a single.<br>
-*Clear API to implement Web frontend.<br>
+*Write action, action type, reducer in a single file.<br>
+\*Clear API to implement Web frontend.<br>
 
 ## How to use
 
-Create a creat-react-app project
+- [Create a creat-react-app project]
 
 ```
 npx create-react-app my-app
 ```
 
-delete contents in index.js
+Delete contents in index.js
 
 import app.js
 
