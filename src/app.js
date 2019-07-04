@@ -12,9 +12,13 @@ export const app = {
   reducers: {},
   middleware: [],
   pages: [],
+  apiList: {},
 
   getStore: function() {
     return this.store;
+  },
+  getApi: function() {
+    return this.apiList;
   },
   getReducers: function(reducers) {
     return combineReducers(reducers);
@@ -64,9 +68,11 @@ export const app = {
     this.models.push(appModel);
   },
   page: function(appPage) {
-    console.log("mm", appPage.default);
-    console.log("mm", appPage);
     this.pages.push(appPage);
+  },
+  api: function(appApi) {
+    this.apiList[appApi.name] = appApi.path;
+    console.log("this.apiList", this.apiList);
   }
 };
 

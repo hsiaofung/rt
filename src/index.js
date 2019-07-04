@@ -7,13 +7,13 @@ app.page({ path: "/about", component: require("./pages/About") });
 app.model(require("./models/products"));
 app.model(require("./models/miniCart"));
 //註冊api
-// app.api({
-//   name: "info",
-//   path: `${HOST_URL}/shopping/v1/compositions/productDetails/info`
-// });
-// app.api({
-//   name: "wishList",
-//   path: `${HOST_URL}/shopping/v1/compositions/wishList`
-// });
+app.api({
+  name: "info",
+  path: `/shopping/v1/compositions/productDetails/info`
+});
+app.api({
+  name: "wishList",
+  path: `/shopping/v1/compositions/wishList`
+});
 //啟動app
 app.start("root");
