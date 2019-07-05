@@ -1,4 +1,4 @@
 import React from "react";
 export default () => {
-  return <h1>About</h1>;
+  return <h1>About!</h1>;
 };
