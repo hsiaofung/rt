@@ -82,18 +82,14 @@ export const app = {
     return path + "/" + query.params;
   },
   getApiData: async function(query, method) {
+    const options = {
+      body: query.body,
+      credentials: query.credentials,
+      method: query.method,
+      headers: query.headers
+    };
     try {
-      const data = await fetch(this.getURL(query), {
-        body:
-          (query.hasOwnProperty("body") && JSON.stringify(query.body)) || null,
-        credentials:
-          (query.hasOwnProperty("credentials") && query.credentials) ||
-          "include",
-        method: (query.hasOwnProperty("method") && query.method) || "GET",
-        headers: (query.hasOwnProperty("headers") && query.headers) || {
-          "content-type": "application/json"
-        }
-      });
+      const data = await fetch(this.getURL(query), options);
       if (query.pass.indexOf(data.status) === -1) {
         throw new Error();
       }

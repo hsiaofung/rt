@@ -138,10 +138,10 @@ var app = exports.app = {
               _context.prev = 0;
               _context.next = 3;
               return fetch(this.getURL(query), {
-                body: query.hasOwnProperty("body") ? JSON.stringify(query.body) : null,
-                credentials: "include",
-                method: method,
-                headers: {
+                body: query.hasOwnProperty("body") && JSON.stringify(query.body) || null,
+                credentials: query.hasOwnProperty("credentials") && query.credentials || "include",
+                method: query.hasOwnProperty("method") && query.method || "GET",
+                headers: query.hasOwnProperty("headers") && query.headers || {
                   "content-type": "application/json"
                 }
               });
