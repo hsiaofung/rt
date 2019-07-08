@@ -37,6 +37,12 @@ app.page({ path: "/home", component: require("./pages/Home") });
 app.model(require("./models/products"));
 ```
 
+- Or, add a new api
+
+```
+app.api({name:'products', path:''});
+```
+
 - After that, strat your app
 
 ```

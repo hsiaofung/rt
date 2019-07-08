@@ -1,5 +1,6 @@
 import { dispatch } from "../app.js";
 
+
 export default {
   name: "home",
   actions: {

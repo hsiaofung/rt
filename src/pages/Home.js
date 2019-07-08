@@ -1,13 +1,29 @@
 import React from "react";
-import { app } from "../app.js";
+import products from "../models/products";
+import { connect } from "react-redux";
 
 class Home extends React.Component {
   componentDidMount() {
-    console.log("api", app.getApi().info);
-    console.log("api", app.getApi().wishList);
+    this.props.fetchData();
   }
   render() {
     return <p>AAAAA</p>;
   }
 }
-export default Home;
+const mapStateToProps = state => {
+  return {
+    episodes: state.home.episodes,
+    favourites: state.home.favourites
+  };
+};
+const mapDispatchToProps = () => {
+  return {
+    fetchData: () => products.actions.fetchData(),
+    addFav: payload => products.actions.addFav(payload),
+    removeFav: payload => products.actions.removeFav(payload)
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

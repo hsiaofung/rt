@@ -5,6 +5,7 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import result from "lodash/fp/result";
 
 export const app = {
   models: [],
@@ -73,9 +74,52 @@ export const app = {
   api: function(appApi) {
     this.apiList[appApi.name] = appApi.path;
     console.log("this.apiList", this.apiList);
+  },
+  getURL: function(query) {
+    const path = result([query.api], this.apiList);
+    if (!query.hasOwnProperty("params")) return path;
+    if (query.params === undefined) return path;
+    return path + "/" + query.params;
+  },
+  getApiData: async function(query, method) {
+    try {
+      const data = await fetch(this.getURL(query), {
+        body: query.hasOwnProperty("body") ? JSON.stringify(query.body) : null,
+        credentials: "include",
+        method: method,
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+      if (query.pass.indexOf(data.status) === -1) {
+        throw new Error();
+      }
+      const dataJSON = await data.json();
+      return dataJSON;
+    } catch (error) {
+      query.errorFunc();
+    }
   }
 };
 
 export function dispatch(action) {
   return app.getStore().dispatch(action);
 }
+
+export const req = {
+  post: function(query) {
+    return app.getApiData(query, "POST");
+  },
+  get: function(query) {
+    return app.getApiData(query, "GET");
+  },
+  put: function(query) {
+    return app.getApiData(query, "PUT");
+  },
+  patch: function(query) {
+    return app.getApiData(query, "PATCH");
+  },
+  delete: function(query) {
+    return app.getApiData(query, "DELETE");
+  }
+};

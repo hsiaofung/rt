@@ -6,6 +6,7 @@ app.page({ path: "/about", component: require("./pages/About") });
 //註冊模型
 app.model(require("./models/products"));
 app.model(require("./models/miniCart"));
+app.model(require("./models/home"));
 //註冊api
 app.api({
   name: "info",
