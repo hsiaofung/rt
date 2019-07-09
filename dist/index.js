@@ -130,52 +130,58 @@ var app = exports.app = {
   },
   getApiData: function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(query, method) {
-      var data, dataJSON;
+      var options, data, dataJSON;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return fetch(this.getURL(query), {
-                body: query.hasOwnProperty("body") && JSON.stringify(query.body) || null,
+              options = {
+                body: query.hasOwnProperty("body") && query.body || null,
                 credentials: query.hasOwnProperty("credentials") && query.credentials || "include",
-                method: query.hasOwnProperty("method") && query.method || "GET",
+                method: method,
                 headers: query.hasOwnProperty("headers") && query.headers || {
                   "content-type": "application/json"
                 }
-              });
+              };
+              _context.prev = 1;
+              _context.next = 4;
+              return fetch(this.getURL(query), options);
 
-            case 3:
+            case 4:
               data = _context.sent;
 
+              if (!query.hasOwnProperty("pass")) {
+                _context.next = 8;
+                break;
+              }
+
               if (!(query.pass.indexOf(data.status) === -1)) {
-                _context.next = 6;
+                _context.next = 8;
                 break;
               }
 
               throw new Error();
 
-            case 6:
-              _context.next = 8;
+            case 8:
+              _context.next = 10;
               return data.json();
 
-            case 8:
+            case 10:
               dataJSON = _context.sent;
               return _context.abrupt("return", dataJSON);
 
-            case 12:
-              _context.prev = 12;
-              _context.t0 = _context["catch"](0);
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](1);
 
               query.errorFunc();
 
-            case 15:
+            case 17:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[0, 12]]);
+      }, _callee, this, [[1, 14]]);
     }));
 
     function getApiData(_x, _x2) {

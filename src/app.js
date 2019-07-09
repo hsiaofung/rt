@@ -83,15 +83,20 @@ export const app = {
   },
   getApiData: async function(query, method) {
     const options = {
-      body: query.body,
-      credentials: query.credentials,
-      method: query.method,
-      headers: query.headers
+      body: (query.hasOwnProperty("body") && query.body) || null,
+      credentials:
+        (query.hasOwnProperty("credentials") && query.credentials) || "include",
+      method: method,
+      headers: (query.hasOwnProperty("headers") && query.headers) || {
+        "content-type": "application/json"
+      }
     };
     try {
       const data = await fetch(this.getURL(query), options);
-      if (query.pass.indexOf(data.status) === -1) {
-        throw new Error();
+      if (query.hasOwnProperty("pass")) {
+        if (query.pass.indexOf(data.status) === -1) {
+          throw new Error();
+        }
       }
       const dataJSON = await data.json();
       return dataJSON;
