@@ -1,25 +1,24 @@
-import { dispatch } from "../app.js";
+import { dispatch, req } from "../app";
 
+const initialState = { episodes: [], favourites: [], isComplete: false };
 
 export default {
   name: "home",
   actions: {
     addFav: payload => dispatch({ type: "ADD_FAV", payload }),
     removeFav: payload => dispatch({ type: "REMOVE_FAV", payload }),
-    fetchDataAction: async () => {
-      const data = await fetch(
-        "https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes"
-      );
-      const dataJSON = await data.json();
-      const payload = dataJSON._embedded.episodes;
-      dispatch({ type: "FETCH_DATA", payload });
+    fetchData: payload => dispatch({ type: "FETCH_DATA", payload }),
+    fetchDataAction: async function() {
+      const data = await req.get({
+        credentials: "omit",
+        api: "episodes",
+        headers: {}
+      });
+      const payload = data._embedded.episodes;
+      this.fetchData(payload);
     }
   },
-  reducers: function(
-    state = { episodes: [], favourites: [], isComplete: false },
-    action
-  ) {
-    console.log("state.favourites", state.favourites);
+  reducers: function(state = initialState, action) {
     switch (action.type) {
       case "FETCH_DATA":
         return { ...state, episodes: action.payload, isComplete: true };

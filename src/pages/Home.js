@@ -1,13 +1,37 @@
 import React from "react";
-import products from "../models/products";
 import { connect } from "react-redux";
+import home from "../models/home";
+import "./home.css";
 
-class Home extends React.Component {
+const EpisodesList = React.lazy(() => import("../components/EpisodesList"));
+
+class Fav extends React.Component {
   componentDidMount() {
-    this.props.fetchData();
+    this.props.episodes.length === 0 && this.props.fetchDataAction();
   }
+  toggleFavAction = episode => {
+    const episodeInFavourites = this.props.favourites.includes(episode);
+    let dispatchObj = this.props.addFav(episode);
+    if (episodeInFavourites) {
+      const favouritesWithoutEpisode = this.props.favourites.filter(
+        fav => fav.id !== episode.id
+      );
+      dispatchObj = this.props.removeFav(favouritesWithoutEpisode);
+    }
+    return dispatchObj;
+  };
   render() {
-    return <p>AAAAA</p>;
+    return (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <section className="episode-layout">
+          <EpisodesList
+            episodes={this.props.episodes}
+            favourites={this.props.favourites}
+            toggleFavAction={this.toggleFavAction}
+          />
+        </section>
+      </React.Suspense>
+    );
   }
 }
 const mapStateToProps = state => {
@@ -18,12 +42,12 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = () => {
   return {
-    fetchData: () => products.actions.fetchData(),
-    addFav: payload => products.actions.addFav(payload),
-    removeFav: payload => products.actions.removeFav(payload)
+    fetchDataAction: () => home.actions.fetchDataAction(),
+    addFav: payload => home.actions.addFav(payload),
+    removeFav: payload => home.actions.removeFav(payload)
   };
 };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(Fav);
