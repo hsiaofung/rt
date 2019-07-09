@@ -2,6 +2,9 @@
 
 Redux, React-Redux, Redux-thunk, Router Encapsulation.<br>
 So we can only use single model file to implement Redux/Redux-thunk<br>
+Medium : 
+hf-rt : <a href="https://medium.com/@hfchou/hf-rt-a-framework-to-easy-use-redux-redux-thunk-and-react-router-e85e23f42391">A framework to easy use redux, redux-thunk and react-router(partI)</a>
+
 
 ## Feature
 
