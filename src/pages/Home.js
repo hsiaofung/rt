@@ -5,7 +5,7 @@ import "./home.css";
 
 const EpisodesList = React.lazy(() => import("../components/EpisodesList"));
 
-class Fav extends React.Component {
+class Home extends React.Component {
   componentDidMount() {
     this.props.episodes.length === 0 && this.props.fetchDataAction();
   }
@@ -50,4 +50,4 @@ const mapDispatchToProps = () => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Fav);
+)(Home);
