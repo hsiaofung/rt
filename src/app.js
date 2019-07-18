@@ -83,7 +83,7 @@ export const app = {
   },
   getApiData: async function(query, method) {
     const options = {
-      body: (query.hasOwnProperty("body") && query.body) || null,
+      body: (query.hasOwnProperty("body") && JSON.stringify(query.body)) || null,
       credentials:
         (query.hasOwnProperty("credentials") && query.credentials) || "include",
       method: method,
