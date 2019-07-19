@@ -73,7 +73,6 @@ export const app = {
   },
   api: function(appApi) {
     this.apiList[appApi.name] = appApi.path;
-    console.log("this.apiList", this.apiList);
   },
   getURL: function(query) {
     const path = result([query.api], this.apiList);
@@ -83,7 +82,8 @@ export const app = {
   },
   getApiData: async function(query, method) {
     const options = {
-      body: (query.hasOwnProperty("body") && JSON.stringify(query.body)) || null,
+      body:
+        (query.hasOwnProperty("body") && JSON.stringify(query.body)) || null,
       credentials:
         (query.hasOwnProperty("credentials") && query.credentials) || "include",
       method: method,
@@ -127,3 +127,16 @@ export const req = {
     return app.getApiData(query, "DELETE");
   }
 };
+
+export function isOutOfStock(max, fn) {
+  if (max == 0) {
+    return null;
+  }
+  return fn;
+}
+export function isOneInStock(max, fn) {
+  if (max == 1) {
+    return null;
+  }
+  return fn;
+}

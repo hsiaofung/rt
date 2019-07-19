@@ -120,7 +120,6 @@ var app = exports.app = {
   },
   api: function api(appApi) {
     this.apiList[appApi.name] = appApi.path;
-    console.log("this.apiList", this.apiList);
   },
   getURL: function getURL(query) {
     var path = (0, _result2.default)([query.api], this.apiList);
@@ -136,7 +135,7 @@ var app = exports.app = {
           switch (_context.prev = _context.next) {
             case 0:
               options = {
-                body: query.hasOwnProperty("body") && query.body || null,
+                body: query.hasOwnProperty("body") && JSON.stringify(query.body) || null,
                 credentials: query.hasOwnProperty("credentials") && query.credentials || "include",
                 method: method,
                 headers: query.hasOwnProperty("headers") && query.headers || {
