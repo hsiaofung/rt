@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.req = exports.app = undefined;
 exports.dispatch = dispatch;
+exports.isOutOfStock = isOutOfStock;
+exports.isOneInStock = isOneInStock;
 
 var _react = require("react");
 
@@ -212,3 +214,16 @@ var req = exports.req = {
     return app.getApiData(query, "DELETE");
   }
 };
+
+function isOutOfStock(max, fn) {
+  if (max == 0) {
+    return null;
+  }
+  return fn;
+}
+function isOneInStock(max, fn) {
+  if (max == 1) {
+    return null;
+  }
+  return fn;
+}

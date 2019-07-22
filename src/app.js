@@ -140,3 +140,12 @@ export function isOneInStock(max, fn) {
   }
   return fn;
 }
+
+export const validate = {
+  email: function(email, fn) {
+    var rule = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$");
+    if (email === "") return null;
+    if (!rule.test(email)) return null;
+    return fn;
+  }
+};
