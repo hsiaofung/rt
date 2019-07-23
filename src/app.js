@@ -160,3 +160,6 @@ export function jumpTologin(casHostUrl) {
     "/cas/login?region=tw&locale=zh_TW&service=" +
     encodeURIComponent(window.location.href);
 }
+export function getQuantity(quantity) {
+  return quantity.stock - quantity.purchase;
+}
