@@ -235,8 +235,8 @@ function jumpToLogin(casHostUrl) {
 }
 
 var pdt = exports.pdt = {
-  getSumQty: function getSumQty(quantity) {
-    return quantity.stock - quantity.purchase;
+  getSumQty: function getSumQty(qty) {
+    return qty.stock - qty.purchase;
   },
   getPoQty: function getPoQty(cartItems, productId) {
     var count = 0;
@@ -250,10 +250,10 @@ var pdt = exports.pdt = {
     }
     return count;
   },
-  isOneInStock: function isOneInStock(max, fn) {
-    return max == 1 && null || fn;
+  isOneInStock: function isOneInStock(qty, fn) {
+    return this.getSumQty(qty) == 1 && null || fn;
   },
-  isOutOfStock: function isOutOfStock(max, fn) {
-    return max <= 0 && null || fn;
+  isOutOfStock: function isOutOfStock(qty, fn) {
+    return this.getSumQty(qty) <= 0 && null || fn;
   }
 };

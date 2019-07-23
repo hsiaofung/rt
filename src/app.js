@@ -165,9 +165,9 @@ export const pdt = {
     return count;
   },
   isOneInStock: function(qty, fn) {
-    return (this.getSumQty(qty) == 1 && null) || fn;
+    return (this.getSumQty(qty) != 1 && fn) || null;
   },
   isOutOfStock: function(qty, fn) {
-    return (this.getSumQty(qty) <= 0 && null) || fn;
+    return (this.getSumQty(qty) > 0 && fn) || null;
   }
 };
