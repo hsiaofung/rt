@@ -4,6 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.validate = exports.req = exports.app = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 exports.dispatch = dispatch;
 exports.isOutOfStock = isOutOfStock;
 exports.isOneInStock = isOneInStock;
@@ -124,6 +127,10 @@ var app = exports.app = {
     this.apiList[appApi.name] = appApi.path;
   },
   getURL: function getURL(query) {
+    if ((typeof query === "undefined" ? "undefined" : _typeof(query)) !== "object") {
+      console.log('query should be objetc, example:{api:"path"}');
+      return;
+    }
     var path = (0, _result2.default)([query.api], this.apiList);
     if (!query.hasOwnProperty("params")) return path;
     if (query.params === undefined) return path;

@@ -76,7 +76,7 @@ export const app = {
   },
   getURL: function(query) {
     if (typeof query !== "object") {
-      console.log('query should be objetc, example:{api:"path"}');
+      console.error('query should be object, example:{api:"path"}');
       return;
     }
     const path = result([query.api], this.apiList);
