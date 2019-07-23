@@ -75,6 +75,10 @@ export const app = {
     this.apiList[appApi.name] = appApi.path;
   },
   getURL: function(query) {
+    if (typeof query !== "object") {
+      console.log('query should be objetc, example:{api:"path"}');
+      return;
+    }
     const path = result([query.api], this.apiList);
     if (!query.hasOwnProperty("params")) return path;
     if (query.params === undefined) return path;

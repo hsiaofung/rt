@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.req = exports.app = undefined;
+exports.validate = exports.req = exports.app = undefined;
 exports.dispatch = dispatch;
 exports.isOutOfStock = isOutOfStock;
 exports.isOneInStock = isOneInStock;
@@ -227,3 +227,12 @@ function isOneInStock(max, fn) {
   }
   return fn;
 }
+
+var validate = exports.validate = {
+  email: function email(_email, fn) {
+    var rule = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$");
+    if (_email === "") return null;
+    if (!rule.test(_email)) return null;
+    return fn;
+  }
+};
