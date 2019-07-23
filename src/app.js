@@ -149,8 +149,8 @@ export function jumpToLogin(casHostUrl) {
 }
 
 export const pdt = {
-  getSumQty: function(quantity) {
-    return quantity.stock - quantity.purchase;
+  getSumQty: function(qty) {
+    return qty.stock - qty.purchase;
   },
   getPoQty: function(cartItems, productId) {
     let count = 0;
@@ -164,10 +164,10 @@ export const pdt = {
     }
     return count;
   },
-  isOneInStock: function(max, fn) {
-    return (max == 1 && null) || fn;
+  isOneInStock: function(qty, fn) {
+    return (this.getSumQty(qty) == 1 && null) || fn;
   },
-  isOutOfStock: function(max, fn) {
-    return (max <= 0 && null) || fn;
+  isOutOfStock: function(qty, fn) {
+    return (this.getSumQty(qty) <= 0 && null) || fn;
   }
 };

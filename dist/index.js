@@ -3,15 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.validate = exports.req = exports.app = undefined;
+exports.pdt = exports.validate = exports.req = exports.app = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 exports.dispatch = dispatch;
-exports.isOutOfStock = isOutOfStock;
-exports.isOneInStock = isOneInStock;
-exports.jumpTologin = jumpTologin;
-exports.getQuantity = getQuantity;
+exports.jumpToLogin = jumpToLogin;
 
 var _react = require("react");
 
@@ -224,19 +221,6 @@ var req = exports.req = {
   }
 };
 
-function isOutOfStock(max, fn) {
-  if (max <= 0) {
-    return null;
-  }
-  return fn;
-}
-function isOneInStock(max, fn) {
-  if (max == 1) {
-    return null;
-  }
-  return fn;
-}
-
 var validate = exports.validate = {
   email: function email(_email, fn) {
     var rule = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$");
@@ -246,9 +230,30 @@ var validate = exports.validate = {
   }
 };
 
-function jumpTologin(casHostUrl) {
+function jumpToLogin(casHostUrl) {
   window.location.href = casHostUrl + "/cas/login?region=tw&locale=zh_TW&service=" + encodeURIComponent(window.location.href);
 }
-function getQuantity(quantity) {
-  return quantity.stock - quantity.purchase;
-}
+
+var pdt = exports.pdt = {
+  getSumQty: function getSumQty(quantity) {
+    return quantity.stock - quantity.purchase;
+  },
+  getPoQty: function getPoQty(cartItems, productId) {
+    var count = 0;
+
+    if (productId !== undefined) {
+      cartItems.forEach(function (item) {
+        if (item.cbu === productId) {
+          count++;
+        }
+      });
+    }
+    return count;
+  },
+  isOneInStock: function isOneInStock(max, fn) {
+    return max == 1 && null || fn;
+  },
+  isOutOfStock: function isOutOfStock(max, fn) {
+    return max <= 0 && null || fn;
+  }
+};
