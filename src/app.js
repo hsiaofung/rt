@@ -133,7 +133,7 @@ export const req = {
 };
 
 export function isOutOfStock(max, fn) {
-  if (max == 0) {
+  if (max <= 0) {
     return null;
   }
   return fn;

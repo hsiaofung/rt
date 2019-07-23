@@ -10,6 +10,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 exports.dispatch = dispatch;
 exports.isOutOfStock = isOutOfStock;
 exports.isOneInStock = isOneInStock;
+exports.jumpTologin = jumpTologin;
+exports.getQuantity = getQuantity;
 
 var _react = require("react");
 
@@ -243,3 +245,10 @@ var validate = exports.validate = {
     return fn;
   }
 };
+
+function jumpTologin(casHostUrl) {
+  window.location.href = casHostUrl + "/cas/login?region=tw&locale=zh_TW&service=" + encodeURIComponent(window.location.href);
+}
+function getQuantity(quantity) {
+  return quantity.stock - quantity.purchase;
+}
