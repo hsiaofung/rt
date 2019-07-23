@@ -132,19 +132,6 @@ export const req = {
   }
 };
 
-export function isOutOfStock(max, fn) {
-  if (max <= 0) {
-    return null;
-  }
-  return fn;
-}
-export function isOneInStock(max, fn) {
-  if (max == 1) {
-    return null;
-  }
-  return fn;
-}
-
 export const validate = {
   email: function(email, fn) {
     var rule = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$");
@@ -154,12 +141,33 @@ export const validate = {
   }
 };
 
-export function jumpTologin(casHostUrl) {
+export function jumpToLogin(casHostUrl) {
   window.location.href =
     casHostUrl +
     "/cas/login?region=tw&locale=zh_TW&service=" +
     encodeURIComponent(window.location.href);
 }
-export function getQuantity(quantity) {
-  return quantity.stock - quantity.purchase;
-}
+
+export const pdt = {
+  getSumQty: function(quantity) {
+    return quantity.stock - quantity.purchase;
+  },
+  getPoQty: function(cartItems, productId) {
+    let count = 0;
+
+    if (productId !== undefined) {
+      cartItems.forEach(item => {
+        if (item.cbu === productId) {
+          count++;
+        }
+      });
+    }
+    return count;
+  },
+  isOneInStock: function(max, fn) {
+    return (max == 1 && null) || fn;
+  },
+  isOutOfStock: function(max, fn) {
+    return (max <= 0 && null) || fn;
+  }
+};
