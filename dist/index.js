@@ -128,7 +128,7 @@ var app = exports.app = {
   },
   getURL: function getURL(query) {
     if ((typeof query === "undefined" ? "undefined" : _typeof(query)) !== "object") {
-      console.log('query should be objetc, example:{api:"path"}');
+      console.error('query should be object, example:{api:"path"}');
       return;
     }
     var path = (0, _result2.default)([query.api], this.apiList);

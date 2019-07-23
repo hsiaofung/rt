@@ -153,3 +153,10 @@ export const validate = {
     return fn;
   }
 };
+
+export function jumpTologin(casHostUrl) {
+  window.location.href =
+    casHostUrl +
+    "/cas/login?region=tw&locale=zh_TW&service=" +
+    encodeURIComponent(window.location.href);
+}
