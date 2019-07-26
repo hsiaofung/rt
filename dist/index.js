@@ -236,7 +236,7 @@ function jumpToLogin(casHostUrl) {
 }
 
 function lock(isLock, fn) {
-  if (isLock == undefined) console.error("isLock is not define in lock func.");
+  console.log("isLOck", isLock);
   if (isLock) return null;
   return fn;
 }
