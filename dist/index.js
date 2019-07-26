@@ -251,9 +251,9 @@ var pdt = exports.pdt = {
     return count;
   },
   isOneInStock: function isOneInStock(qty, fn) {
-    return this.getSumQty(qty) == 1 && null || fn;
+    return this.getSumQty(qty) != 1 && fn || null;
   },
   isOutOfStock: function isOutOfStock(qty, fn) {
-    return this.getSumQty(qty) <= 0 && null || fn;
+    return this.getSumQty(qty) > 0 && fn || null;
   }
 };

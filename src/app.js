@@ -148,6 +148,10 @@ export function jumpToLogin(casHostUrl) {
     encodeURIComponent(window.location.href);
 }
 
+export function lock(isLock, fn) {
+  if (isLock) return null;
+  return fn;
+}
 export const pdt = {
   getSumQty: function(qty) {
     return qty.stock - qty.purchase;
