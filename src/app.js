@@ -149,6 +149,7 @@ export function jumpToLogin(casHostUrl) {
 }
 
 export function lock(isLock, fn) {
+  if (isLock == undefined) console.error("isLock is not define in lock func.");
   if (isLock) return null;
   return fn;
 }

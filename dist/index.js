@@ -9,6 +9,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 exports.dispatch = dispatch;
 exports.jumpToLogin = jumpToLogin;
+exports.lock = lock;
 
 var _react = require("react");
 
@@ -234,6 +235,10 @@ function jumpToLogin(casHostUrl) {
   window.location.href = casHostUrl + "/cas/login?region=tw&locale=zh_TW&service=" + encodeURIComponent(window.location.href);
 }
 
+function lock(isLock, fn) {
+  if (isLock) return null;
+  return fn;
+}
 var pdt = exports.pdt = {
   getSumQty: function getSumQty(qty) {
     return qty.stock - qty.purchase;
