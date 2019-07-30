@@ -1,6 +1,6 @@
 {
   "name": "hf-rt",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "main": "dist/index.js",
   "peerDependencies": {
     "react": "^16.8.6",

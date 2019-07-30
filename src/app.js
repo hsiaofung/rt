@@ -177,5 +177,9 @@ export const pdt = {
   },
   isOutOfStock: function(qty, fn) {
     return (this.getSumQty(qty) > 0 && fn) || null;
+  },
+  stringToHtml(string) {
+    var htmlObject = <div dangerouslySetInnerHTML={{ __html: string }} />;
+    return htmlObject;
   }
 };

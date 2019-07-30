@@ -236,7 +236,10 @@ function jumpToLogin(casHostUrl) {
 }
 
 function lock(isLock, fn) {
-  console.log("isLOck", isLock);
+  if (typeof isLock !== "boolean") {
+    console.error("isLock should be boolean!");
+    return;
+  }
   if (isLock) return null;
   return fn;
 }
