@@ -181,5 +181,16 @@ export const pdt = {
   stringToHtml(string) {
     var htmlObject = <div dangerouslySetInnerHTML={{ __html: string }} />;
     return htmlObject;
+  },
+  getArrWithAvaliable(baseLine, avaList) {
+    const arrWithAvaliableState = baseLine.map(item => {
+      var status = "notAvaliable";
+
+      if (avaList.some(element => element.code === item.code)) {
+        status = "avaliable";
+      }
+      return { code: item.code, name: item.name, status: status };
+    });
+    return arrWithAvaliableState;
   }
 };

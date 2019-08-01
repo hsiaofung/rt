@@ -264,5 +264,9 @@ var pdt = exports.pdt = {
   },
   isOutOfStock: function isOutOfStock(qty, fn) {
     return this.getSumQty(qty) > 0 && fn || null;
+  },
+  stringToHtml: function stringToHtml(string) {
+    var htmlObject = _react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: string } });
+    return htmlObject;
   }
 };
