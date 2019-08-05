@@ -179,7 +179,7 @@ export const pdt = {
     return (this.getSumQty(qty) > 0 && fn) || null;
   },
   stringToHtml(string) {
-    var htmlObject = <div dangerouslySetInnerHTML={{ __html: string }} />;
+    var htmlObject = <p dangerouslySetInnerHTML={{ __html: string }} />;
     return htmlObject;
   },
   getArrWithAvaliable(baseLine, avaList) {

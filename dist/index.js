@@ -268,5 +268,18 @@ var pdt = exports.pdt = {
   stringToHtml: function stringToHtml(string) {
     var htmlObject = _react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: string } });
     return htmlObject;
+  },
+  getArrWithAvaliable: function getArrWithAvaliable(baseLine, avaList) {
+    var arrWithAvaliableState = baseLine.map(function (item) {
+      var status = "notAvaliable";
+
+      if (avaList.some(function (element) {
+        return element.code === item.code;
+      })) {
+        status = "avaliable";
+      }
+      return { code: item.code, name: item.name, status: status };
+    });
+    return arrWithAvaliableState;
   }
 };
