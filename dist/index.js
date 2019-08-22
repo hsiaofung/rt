@@ -98,7 +98,7 @@ var app = exports.app = {
   render: function render(reducers, language, catalogs) {
     _reactDom2.default.render(this.getProvider(reducers, language, catalogs), document.getElementById("root"));
   },
-  start: function start() {
+  start: function start(language, catalogs) {
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
@@ -124,7 +124,7 @@ var app = exports.app = {
       }
     }
 
-    this.render(this.reducers);
+    this.render(this.reducers, language, catalogs);
   },
   model: function model(appModel) {
     this.models.push(appModel);

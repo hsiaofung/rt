@@ -6,7 +6,6 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import result from "lodash/fp/result";
-import { I18nProvider } from "@lingui/react";
 
 export const app = {
   models: [],
@@ -25,14 +24,7 @@ export const app = {
   getReducers: function(reducers) {
     return combineReducers(reducers);
   },
-  getI18n: function(language, catalogs) {
-    return (
-      <I18nProvider language={language} catalogs={catalogs}>
-        {this.getRouter()}
-      </I18nProvider>
-    );
-  },
-  getRouter: function(language, catalogs) {
+  getRouter: function() {
     function getExact(path) {
       return path === "/" ? true : false;
     }
@@ -53,27 +45,25 @@ export const app = {
       </Router>
     );
   },
-  getProvider: function(reducers, language, catalogs) {
+  getProvider: function(reducers) {
     this.store = createStore(
       this.getReducers(reducers),
       composeWithDevTools(applyMiddleware(thunk))
     );
 
-    return (
-      <Provider store={this.store}>{this.getI18n(language, catalogs)}</Provider>
-    );
+    return <Provider store={this.store}>{this.getRouter()}</Provider>;
   },
-  render: function(reducers, language, catalogs) {
+  render: function(reducers) {
     ReactDOM.render(
-      this.getProvider(reducers, language, catalogs),
+      this.getProvider(reducers),
       document.getElementById("root")
     );
   },
-  start: function(language, catalogs) {
+  start: function() {
     for (const m of this.models) {
       this.reducers[m.default.name] = m.default.reducers;
     }
-    this.render(this.reducers, language, catalogs);
+    this.render(this.reducers);
   },
   model: function(appModel) {
     this.models.push(appModel);
