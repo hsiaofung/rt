@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import result from "lodash/fp/result";
+import { I18nProvider } from "@lingui/react";
 
 export const app = {
   models: [],
@@ -24,7 +25,14 @@ export const app = {
   getReducers: function(reducers) {
     return combineReducers(reducers);
   },
-  getRouter: function() {
+  getI18n: function(language, catalogs) {
+    return (
+      <I18nProvider language={language} catalogs={catalogs}>
+        {this.getRouter()}
+      </I18nProvider>
+    );
+  },
+  getRouter: function(language, catalogs) {
     function getExact(path) {
       return path === "/" ? true : false;
     }
@@ -45,17 +53,19 @@ export const app = {
       </Router>
     );
   },
-  getProvider: function(reducers) {
+  getProvider: function(reducers, language, catalogs) {
     this.store = createStore(
       this.getReducers(reducers),
       composeWithDevTools(applyMiddleware(thunk))
     );
 
-    return <Provider store={this.store}>{this.getRouter()}</Provider>;
+    return (
+      <Provider store={this.store}>{this.getI18n(language, catalogs)}</Provider>
+    );
   },
-  render: function(reducers) {
+  render: function(reducers, language, catalogs) {
     ReactDOM.render(
-      this.getProvider(reducers),
+      this.getProvider(reducers, language, catalogs),
       document.getElementById("root")
     );
   },
