@@ -69,11 +69,11 @@ export const app = {
       document.getElementById("root")
     );
   },
-  start: function() {
+  start: function(language, catalogs) {
     for (const m of this.models) {
       this.reducers[m.default.name] = m.default.reducers;
     }
-    this.render(this.reducers);
+    this.render(this.reducers, language, catalogs);
   },
   model: function(appModel) {
     this.models.push(appModel);
