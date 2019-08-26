@@ -162,7 +162,7 @@ export const pdt = {
   },
   getPoQty: function(cartItems, productId) {
     let count = 0;
-
+    if (cartItems !== undefined) return;
     if (productId !== undefined) {
       cartItems.forEach(item => {
         if (item.cbu === productId) {
