@@ -158,6 +158,7 @@ export function lock(isLock, fn) {
 }
 export const pdt = {
   getSumQty: function(qty) {
+    if (qty.stock === "NaN") return 0;
     return qty.stock - qty.purchase;
   },
   getPoQty: function(cartItems, productId) {

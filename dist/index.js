@@ -249,7 +249,7 @@ var pdt = exports.pdt = {
   },
   getPoQty: function getPoQty(cartItems, productId) {
     var count = 0;
-    if (cartItems !== undefined) return;
+    if (cartItems !== undefined) return 0;
     if (productId !== undefined) {
       cartItems.forEach(function (item) {
         if (item.cbu === productId) {
