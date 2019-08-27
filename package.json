@@ -1,6 +1,6 @@
 {
   "name": "hf-rt",
-  "version": "1.0.36",
+  "version": "1.0.38",
   "main": "dist/index.js",
   "peerDependencies": {
     "lodash": "^4.17.11",

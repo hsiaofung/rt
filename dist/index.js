@@ -35,8 +35,6 @@ var _result = require("lodash/fp/result");
 
 var _result2 = _interopRequireDefault(_result);
 
-var _react3 = require("@lingui/react");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -58,14 +56,7 @@ var app = exports.app = {
   getReducers: function getReducers(reducers) {
     return (0, _redux.combineReducers)(reducers);
   },
-  getI18n: function getI18n(language, catalogs) {
-    return _react2.default.createElement(
-      _react3.I18nProvider,
-      { language: language, catalogs: catalogs },
-      this.getRouter()
-    );
-  },
-  getRouter: function getRouter(language, catalogs) {
+  getRouter: function getRouter() {
     function getExact(path) {
       return path === "/" ? true : false;
     }
@@ -86,19 +77,19 @@ var app = exports.app = {
       )
     );
   },
-  getProvider: function getProvider(reducers, language, catalogs) {
+  getProvider: function getProvider(reducers) {
     this.store = (0, _redux.createStore)(this.getReducers(reducers), (0, _developmentOnly.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk2.default)));
 
     return _react2.default.createElement(
       _reactRedux.Provider,
       { store: this.store },
-      this.getI18n(language, catalogs)
+      this.getRouter()
     );
   },
-  render: function render(reducers, language, catalogs) {
-    _reactDom2.default.render(this.getProvider(reducers, language, catalogs), document.getElementById("root"));
+  render: function render(reducers) {
+    _reactDom2.default.render(this.getProvider(reducers), document.getElementById("root"));
   },
-  start: function start(language, catalogs) {
+  start: function start() {
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
@@ -124,7 +115,7 @@ var app = exports.app = {
       }
     }
 
-    this.render(this.reducers, language, catalogs);
+    this.render(this.reducers);
   },
   model: function model(appModel) {
     this.models.push(appModel);
@@ -258,7 +249,7 @@ var pdt = exports.pdt = {
   },
   getPoQty: function getPoQty(cartItems, productId) {
     var count = 0;
-
+    if (cartItems !== undefined) return;
     if (productId !== undefined) {
       cartItems.forEach(function (item) {
         if (item.cbu === productId) {
