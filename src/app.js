@@ -95,18 +95,19 @@ export const app = {
         "content-type": "application/json"
       }
     };
-    try {
-      const data = await fetch(this.getURL(query), options);
-      if (query.hasOwnProperty("pass")) {
-        if (query.pass.indexOf(data.status) === -1) {
-          throw new Error();
-        }
+    // try {
+    const data = await fetch(this.getURL(query), options);
+    if (query.hasOwnProperty("pass")) {
+      if (query.pass.indexOf(data.status) === -1) {
+        throw new Error();
       }
-      const dataJSON = await data.json();
-      return dataJSON;
-    } catch (error) {
-      query.errorFunc();
     }
+    const dataJSON = await data.json();
+    console.log("--- hf-rt response data----- ", dataJSON);
+    return dataJSON;
+    // } catch (error) {
+    //  query.errorFunc();
+    //}
   }
 };
 

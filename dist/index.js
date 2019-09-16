@@ -245,6 +245,7 @@ function lock(isLock, fn) {
 }
 var pdt = exports.pdt = {
   getSumQty: function getSumQty(qty) {
+    if (qty.stock === "NaN") return 0;
     return qty.stock - qty.purchase;
   },
   getPoQty: function getPoQty(cartItems, productId) {
