@@ -178,7 +178,7 @@ var app = exports.app = {
             case 9:
               dataJSON = _context.sent;
 
-              console.log("--- hf-rt response data: path, method, json----- ", this.getURL(query), method, dataJSON);
+              console.log("--- hf-rt response data: path, method, data, json----- ", this.getURL(query), method, data, dataJSON);
               return _context.abrupt("return", dataJSON);
 
             case 12:

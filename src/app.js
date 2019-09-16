@@ -95,7 +95,7 @@ export const app = {
         "content-type": "application/json"
       }
     };
-    // try {
+    try {
     const data = await fetch(this.getURL(query), options);
     if (query.hasOwnProperty("pass")) {
       if (query.pass.indexOf(data.status) === -1) {
@@ -111,9 +111,9 @@ export const app = {
       dataJSON
     );
     return dataJSON;
-    // } catch (error) {
-    //  query.errorFunc();
-    //}
+    } catch (error) {
+     query.errorFunc();
+    }
   }
 };
 
