@@ -106,7 +106,7 @@ export const app = {
     console.log(
       "--- hf-rt response data: path, method, json----- ",
       this.getURL(query),
-      query.method,
+      method,
       dataJSON
     );
     return dataJSON;
