@@ -151,42 +151,47 @@ var app = exports.app = {
                   "content-type": "application/json"
                 }
               };
-              // try {
-
-              _context.next = 3;
+              _context.prev = 1;
+              _context.next = 4;
               return fetch(this.getURL(query), options);
 
-            case 3:
+            case 4:
               data = _context.sent;
 
               if (!query.hasOwnProperty("pass")) {
-                _context.next = 7;
+                _context.next = 8;
                 break;
               }
 
               if (!(query.pass.indexOf(data.status) === -1)) {
-                _context.next = 7;
+                _context.next = 8;
                 break;
               }
 
               throw new Error();
 
-            case 7:
-              _context.next = 9;
+            case 8:
+              _context.next = 10;
               return data.json();
 
-            case 9:
+            case 10:
               dataJSON = _context.sent;
 
               console.log("--- hf-rt response data: path, method, data, json----- ", this.getURL(query), method, data, dataJSON);
               return _context.abrupt("return", dataJSON);
 
-            case 12:
+            case 15:
+              _context.prev = 15;
+              _context.t0 = _context["catch"](1);
+
+              query.errorFunc();
+
+            case 18:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this);
+      }, _callee, this, [[1, 15]]);
     }));
 
     function getApiData(_x, _x2) {
