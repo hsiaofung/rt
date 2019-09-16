@@ -103,7 +103,12 @@ export const app = {
       }
     }
     const dataJSON = await data.json();
-    console.log("--- hf-rt response data----- ", dataJSON);
+    console.log(
+      "--- hf-rt response data: path, method, json----- ",
+      this.getURL(query),
+      query.method,
+      dataJSON
+    );
     return dataJSON;
     // } catch (error) {
     //  query.errorFunc();
