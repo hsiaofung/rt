@@ -96,7 +96,7 @@ export const app = {
       }
     };
 
-    const data = await fetch(this.getURL(query), options);    
+    const data = await fetch(this.getURL(query), options);
     const dataJSON = await data.json();
     console.log(
       "--- hf-rt response data: path, method, data, json----- ",
@@ -162,14 +162,15 @@ export const pdt = {
   },
   getPoQty: function(cartItems, productId) {
     let count = 0;
-    if (cartItems !== undefined) return 0;
-    if (productId !== undefined) {
-      cartItems.forEach(item => {
-        if (item.cbu === productId) {
-          count++;
-        }
-      });
-    }
+    if (cartItems === undefined) return 0;
+    if (productId === undefined) return 0;
+
+    cartItems.forEach(item => {
+      if (item.cbu === productId) {
+        count++;
+      }
+    });
+
     return count;
   },
   isOneInStock: function(qty, fn) {
