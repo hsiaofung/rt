@@ -231,14 +231,15 @@ var pdt = exports.pdt = {
   },
   getPoQty: function getPoQty(cartItems, productId) {
     var count = 0;
-    if (cartItems !== undefined) return 0;
-    if (productId !== undefined) {
-      cartItems.forEach(function (item) {
-        if (item.cbu === productId) {
-          count++;
-        }
-      });
-    }
+    if (cartItems === undefined) return 0;
+    if (productId === undefined) return 0;
+
+    cartItems.forEach(function (item) {
+      if (item.cbu === productId) {
+        count++;
+      }
+    });
+
     return count;
   },
   isOneInStock: function isOneInStock(qty, fn) {
