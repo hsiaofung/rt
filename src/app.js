@@ -86,19 +86,37 @@ export const app = {
     return path + "/" + query.params;
   },
   getApiData: async function(query, method) {
-    const options = {
-      body:
-        (query.hasOwnProperty("body") && JSON.stringify(query.body)) || null,
-      credentials:
-        (query.hasOwnProperty("credentials") && query.credentials) || "include",
-      method: method,
-      cache: 'no-cache',
-      headers: (query.hasOwnProperty("headers") && query.headers) || {
-        "content-type": "application/json",
-      }
-    };
+    let data;
+    let options;
 
-    const data = await fetch(this.getURL(query), options);
+    if (method === "GET") {
+      options = {
+        credentials:
+          (query.hasOwnProperty("credentials") && query.credentials) ||
+          "include",
+        method: method,
+        cache: "no-cache",
+        headers: (query.hasOwnProperty("headers") && query.headers) || {
+          "content-type": "application/json"
+        }
+      };
+      data = await fetch(this.getURL(query));
+    } else {
+      options = {
+        body:
+          (query.hasOwnProperty("body") && JSON.stringify(query.body)) || null,
+        credentials:
+          (query.hasOwnProperty("credentials") && query.credentials) ||
+          "include",
+        method: method,
+        cache: "no-cache",
+        headers: (query.hasOwnProperty("headers") && query.headers) || {
+          "content-type": "application/json"
+        }
+      };
+      data = await fetch(this.getURL(query), options);
+    }
+
     const dataJSON = await data.json();
     console.log(
       "--- hf-rt response data: path, method, data, json----- ",
