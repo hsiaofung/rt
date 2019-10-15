@@ -92,8 +92,9 @@ export const app = {
       credentials:
         (query.hasOwnProperty("credentials") && query.credentials) || "include",
       method: method,
+      cache: 'no-cache',
       headers: (query.hasOwnProperty("headers") && query.headers) || {
-        "content-type": "application/json"
+        "content-type": "application/json",
       }
     };
 
