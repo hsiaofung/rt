@@ -1,6 +1,6 @@
 {
   "name": "hf-rt",
-  "version": "1.0.47",
+  "version": "1.0.48",
   "main": "dist/index.js",
   "peerDependencies": {
     "lodash": "^4.17.11",
@@ -13,6 +13,7 @@
     "redux-thunk": "^2.3.0"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

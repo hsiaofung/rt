@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import result from "lodash/fp/result";
+import "isomorphic-fetch";
 
 export const app = {
   models: [],
