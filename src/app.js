@@ -100,7 +100,7 @@ export const app = {
           "content-type": "application/json"
         }
       };
-      data = await fetch(this.getURL(query));
+      data = await fetch(this.getURL(query), options);
     } else {
       options = {
         body:
