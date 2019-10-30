@@ -118,13 +118,13 @@ export const app = {
     }
 
     const dataJSON = await data.json();
-    console.log(
-      "--- hf-rt response data: path, method, data, json----- ",
-      this.getURL(query),
-      method,
-      data,
-      dataJSON
-    );
+    // console.log(
+    //   "--- hf-rt response data: path, method, data, json----- ",
+    //   this.getURL(query),
+    //   method,
+    //   data,
+    //   dataJSON
+    // );
     return dataJSON;
   }
 };

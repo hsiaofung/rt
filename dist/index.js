@@ -140,34 +140,62 @@ var app = exports.app = {
   },
   getApiData: function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(query, method) {
-      var options, data, dataJSON;
+      var data, options, dataJSON;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              data = void 0;
+              options = void 0;
+
+              if (!(method === "GET")) {
+                _context.next = 9;
+                break;
+              }
+
               options = {
-                body: query.hasOwnProperty("body") && JSON.stringify(query.body) || null,
                 credentials: query.hasOwnProperty("credentials") && query.credentials || "include",
                 method: method,
+                cache: "no-cache",
                 headers: query.hasOwnProperty("headers") && query.headers || {
                   "content-type": "application/json"
                 }
               };
-              _context.next = 3;
+              _context.next = 6;
               return fetch(this.getURL(query), options);
 
-            case 3:
+            case 6:
               data = _context.sent;
-              _context.next = 6;
+              _context.next = 13;
+              break;
+
+            case 9:
+              options = {
+                body: query.hasOwnProperty("body") && JSON.stringify(query.body) || null,
+                credentials: query.hasOwnProperty("credentials") && query.credentials || "include",
+                method: method,
+                cache: "no-cache",
+                headers: query.hasOwnProperty("headers") && query.headers || {
+                  "content-type": "application/json"
+                }
+              };
+              _context.next = 12;
+              return fetch(this.getURL(query), options);
+
+            case 12:
+              data = _context.sent;
+
+            case 13:
+              _context.next = 15;
               return data.json();
 
-            case 6:
+            case 15:
               dataJSON = _context.sent;
 
               console.log("--- hf-rt response data: path, method, data, json----- ", this.getURL(query), method, data, dataJSON);
               return _context.abrupt("return", dataJSON);
 
-            case 9:
+            case 18:
             case "end":
               return _context.stop();
           }
